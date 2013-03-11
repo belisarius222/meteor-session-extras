@@ -3,7 +3,7 @@
   "description": "a few useful helpers for Meteor's Session",
   "homepage": "https://github.com/belisarius222/meteor-session-extras",
   "author": "Ted Blackman <ted.blackman@gmail.com>",
-  "version": "0.1",
+  "version": "0.1.0",
   "git": "https://github.com/belisarius222/meteor-session-extras.git",
   "packages": {}
 }

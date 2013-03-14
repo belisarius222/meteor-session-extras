@@ -6,13 +6,13 @@ _.extend(Session,{
     if (typeof keys === 'string') {
       keys = [keys];
     }
-    Meteor.autorun(function(handle){
+    Deps.autorun(function(computation){
       var allTrue = _.all(keys,function(key){
         return Session.equals(key,true);
       });
       if (allTrue) {
         callback();
-        !repeat && handle.stop();
+        !repeat && computation.stop();
       }
     });
   },
@@ -23,13 +23,13 @@ _.extend(Session,{
     if (typeof keys === 'string') {
       keys = [keys];
     }
-    Meteor.autorun(function(handle){
+    Deps.autorun(function(computation){
       var allFalse = _.all(keys,function(key){
         return ! Session.equals(key,true);
       });
       if (allFalse) {
         callback();
-        !repeat && handle.stop();
+        !repeat && computation.stop();
       }
     });
   },
@@ -37,13 +37,13 @@ _.extend(Session,{
     if (typeof repeat === 'undefined' || repeat == null) {
       repeat = false;
     }
-    Meteor.autorun(function(handle){
+    Deps.autorun(function(computation){
       var allEqual = _.all(_.keys(keysAndValues),function(key){
         return Session.equals(key,keysAndValues[key]);
       });
       if (allEqual) {
         callback();
-        !repeat && handle.stop();
+        !repeat && computation.stop();
       }
     });
   },

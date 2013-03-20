@@ -1,4 +1,26 @@
 _.extend(Session,{
+  isTrue: function(key) {
+    return Session.equals(key, true);
+  },
+  // The closures are memoized so that they will create 
+  // at most one function for each key.  This should 
+  // prevent a memory leak if the function is called
+  // repeatedly.
+  truthTester: _.memoize(function(key) {
+    return function() {
+      return Session.isTrue(key);
+    };
+  }),
+  getter: _.memoize(function (key) {
+    return function() {
+      return Session.get(key);
+    };
+  }),
+  setter: _.memoize(function (key) {
+    return function(value) {
+      return Session.set(key, value);
+    };
+  }),
   whenTrue: function(keys,callback,repeat) {
     if (typeof repeat === 'undefined' || repeat == null) {
       repeat = false;
